@@ -22,7 +22,8 @@ var cbSliderComponent = {
 
 		/**
 		 * On current position change the current position can't be bigger than total medias or smaller than 1
-		 * @param int current Media index to set as current 
+		 * @param int current Media index to set as current
+		 * @param boolean useTransition Flag for using animation to slider to the new current page
 		 */
 		ctrl.setCurrentPosition = function( current, useTransition ){
 			if ( current >= ctrl.medias.length )
@@ -70,6 +71,7 @@ var cbSliderComponent = {
 
 		/**
 		 * On element resize
+		 * @param object event Iframe resize event
 		 */
 		ctrl.onResize = function( event ) {			
 			ctrl.elementWidth = $element.find('iframe')[0].offsetWidth;
@@ -86,7 +88,7 @@ var cbSliderComponent = {
 				ctrl.mediaPerSlide = 2;
 			} else {
 				ctrl.mediaPerSlide = 1;	
-			}
+			}			
 		};
 			
 		// Flag for CSS transition on slide change
@@ -139,7 +141,7 @@ var cbSliderComponent = {
 				ctrl.canceller.resolve("New folder requested");
 			ctrl.canceller = $q.defer();		
 
-			// Load skyfish medias on initialization
+			// Load skyfish medias from folder
 			if ( isNaN(parseInt(ctrl.skyfishFolderId)) ) {
 				throw new Error("Skyfish folder id is missing or not valid. Use skyfish-folder-id on element");
 			} else {
@@ -150,11 +152,10 @@ var cbSliderComponent = {
 					}	
 		        } ).then(function(response){
 
-					// Update media array with the media array from the response 
+					// Update media array with the media array from the response and preload thumbnail images
 					ctrl.medias = response.data.response.media.map(function(media){					
 						media.loaded = false;
-
-						// Preload thumbnail image
+						
 						var img = new Image();
 						img.onload = function() { 
 							media.loaded = true;
@@ -164,9 +165,6 @@ var cbSliderComponent = {
 
 						return media;
 					});
-
-					// Force recalculation of media per slide
-					ctrl.onResize();
 
 		        },function(response){
 		        	throw new Error("skyfish API: "+response.statusText);
@@ -184,9 +182,9 @@ var cbSliderComponent = {
 			 * The dummy iframe is used to trigger the resize event only for the element size change.
 			 */
 			angular.element($element.find('iframe')[0].contentWindow).on("resize",function(){ 
-				ctrl.onResize(); 
+				ctrl.onResize(); 				
 				$scope.$digest();
-			});
+			});			
 
 			// Initialize touch events if hammer.js included	
 			if ( ctrl.isHammertime ) {
@@ -215,6 +213,9 @@ var cbSliderComponent = {
 					$scope.$digest();	
 				});  
 			};
+
+			// Calculate nr. of media per slide 
+			ctrl.onResize();
 		};
 
 		/**
