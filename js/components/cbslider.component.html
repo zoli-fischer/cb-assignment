@@ -1,0 +1,18 @@
+<div class="cbslider">
+	<a href="javascript:{}" class="arrow left" ng-class="{ 'disabled': !$ctrl.isPreviousSlide() }" ng-click="$ctrl.previousSlide()"></a>
+	<a href="javascript:{}" class="arrow right" ng-class="{ 'disabled': !$ctrl.isNextSlide() }" ng-click="$ctrl.nextSlide()"></a>
+	<div class="inner">
+		<div class="carousel" ng-class="'image-on-slide-'+$ctrl.mediaPerSlide" ng-style="$ctrl.styleCarousel()">
+			<div ng-repeat="media in $ctrl.medias">
+				<div class="image" ng-class="{ 'loaded': media.loaded }"  ng-style="{ 'background-image': 'url('+( media.loaded ? media.thumbnail_url_ssl : '' )+')' }"></div>
+				<div class="text">
+					<span>{{media.description}}</span>					
+					<small>{{media.filename}}</small>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Used for resize element detection-->
+	<iframe></iframe>
+</div>

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang="en" ng-app="cbSliderApp" ng-controller="cbSliderApp">
+	<head>
+		<title>Colourbox Slider Assignment</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="Description" content="Colourbox Slider Assignment" />
+
+		<link rel="shortcut icon" href="https://d3acja3ybn8ixf.cloudfront.net/gfx/icons/favicon_colourbox.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="https://d3acja3ybn8ixf.cloudfront.net/gfx/icons/touch-icon-iphone.png" />               
+		
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/reset.css" /> 
+		<link rel="stylesheet/less" type="text/css" href="css/index.less" />
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.0.2/less.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<script src="lib/hammer.min.js"></script>
+		<script src="js/components/cbslider.component.js"></script>
+		<script src="js/cbslider.app.js"></script>
+	</head>
+	<body>
+
+		<header>
+			<div class="container">
+				<div class="row">
+					<div class="col-8 header-content">
+						<div>
+							<h1>Thank you for using Colourbox!</h1>
+							<p>You are now signed out but your journey<br>doesn't have to end here.</p>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</header>
+
+		<section class="container second-section text-center-small">
+			<div class="row">
+				<div class="col-10">
+					<h2>We found some fantastic collections for you</h2>
+				</div>
+				<div  class="col-2 text-right-large text-right-medium">
+					<a href="#" class="discover-link">Discover more <img src="https://d3acja3ybn8ixf.cloudfront.net/colourbox/gfx/frontpage/front_green-arrow.jpg" /></a>
+				</div>
+			</div>			
+		</section>
+
+		<section class="container cbslider-holder">
+			<div class="row">
+				<div class="col-12">
+					<cbslider skyfish-folder-id="folderId"></cbslider>
+				</div>
+			</div>
+		</section>	
+		<!-- 935575 / 936177 -->
+
+		<footer class="container text-center-small">
+			<div class="row">
+				<div class="col-8">					
+					<h2>Let's stay in touch</h2>
+					<p><small>Sign up for newsletter or follow us on Social Media</small></p>					
+				</div>				
+			</div>
+			<div class="footer-spacer"></div>
+			<div class="row">
+				<div class="col-9">					
+					<form id="email-form">
+						<input type="email" name="email" value="" placeholder="Email" />
+						<button class="btn" ng-click="click()">Keep me updated</button>
+					</form>
+				</div>
+				<div class="col-3 text-right-large text-right-medium">
+					<div class="social-icons">
+						<a href=""><img src="assets/Pinterest.svg" /></a>
+						<a href=""><img src="assets/Facebook_Color.svg" /></a>
+						<a href=""><img src="assets/Instagram_Color.jpg" /></a>
+					</div>
+				</div>
+			</div>			
+		</footer>
+
+	</body>
+</html>

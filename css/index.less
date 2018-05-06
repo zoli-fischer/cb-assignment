@@ -1,0 +1,525 @@
+/**
+ * Set font family to all elements
+ */
+* {
+	font-family: 'Open Sans', sans-serif;
+}
+
+/**
+ * Grid structure - with minimal functionality 
+ */
+
+/** Number of columns in the grid. **/
+@grid-columns:              12;
+
+/** Padding between columns. Gets divided in half for the left and right. **/
+@grid-gutter-width:         30px;
+
+/** Using 3 breakpoints - different then the usual, to fit design in the 2 images
+ * large - high resolution screens, 
+ * medium - small resolution screens 
+ * small - mobile phone and tablets
+ */
+@screen-medium-max:		    1319px;
+@screen-small-max:			1024px;
+
+/** Define the maximum width of `.container` for different screen sizes. */
+@container-large:           (1216px + @grid-gutter-width);
+@container-medium:          (962px + @grid-gutter-width);
+@container-small:           (604px + @grid-gutter-width);
+
+/** 
+ * Loop definition for grid columns generation 
+ * @param grid columns number 
+ */
+.grid-columns-loop (@i) when (@i > 0) {
+	> .col-@{i} {
+		float: left;
+		width: percentage(1 / @grid-columns * @i);
+		padding-left: @grid-gutter-width / 2;
+		padding-right: @grid-gutter-width / 2;
+	}
+    .grid-columns-loop(@i - 1);
+}
+
+.container {
+	width: @container-large;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	padding-left: @grid-gutter-width / 2;
+	padding-right: @grid-gutter-width / 2;
+
+	@media (max-width: @screen-medium-max) {
+		width: @container-medium;
+	}
+
+	@media (max-width: @screen-small-max) {
+		width: auto;
+		max-width: @container-small;		
+	}
+
+	&:after,
+	&:before {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+
+	> .row {
+		margin-left: -@grid-gutter-width / 2;
+		margin-right: -@grid-gutter-width / 2;
+
+		&:after,
+		&:before {
+			content: " ";
+			display: table;
+			clear: both;
+		}
+
+		/** Grid columns */
+		.grid-columns-loop(@grid-columns);
+
+		@media (max-width: @screen-small-max) {
+			> *[class*="col-"] {
+				float: none;
+				width: auto;
+			}
+		}
+	}
+}
+
+/**
+ * Text formats
+ */
+h1 {
+	font-size: 34px;
+	line-height: 50px;
+	font-weight: normal;
+	color: #262626;
+	margin-bottom: 10px;
+
+	@media (max-width: @screen-small-max) {
+		font-size: 30px;
+		line-height: 40px;
+	}
+}
+
+h2 {
+	font-size: 30px;
+	line-height: 36px;
+	font-weight: normal;
+	color: #262626;
+	margin-bottom: 9px;
+    letter-spacing: 0.35px;
+
+
+	@media (max-width: @screen-small-max) {
+		font-size: 22px;
+		line-height: 26px;
+    	letter-spacing: 0px;
+	}
+}
+
+p {
+	font-size: 18px;
+	line-height: 24px;
+	color: #9099a2;
+
+	small {
+		font-size: 16px;
+		letter-spacing: 0.2px;
+		padding-left: 4px;
+	}
+}
+
+a {
+	color: #5fa123;
+	text-decoration: none;
+	
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+@media (min-width: @screen-medium-max + 1) {
+	.text-right-large { text-align: right; }
+	.text-center-large { text-align: center; }
+}
+
+@media (min-width: @screen-small-max + 1) and (max-width: @screen-medium-max) {
+	.text-right-medium { text-align: right; }
+	.text-center-medium { text-align: center; }
+}
+
+@media (max-width: @screen-small-max) {
+	.text-right-small { text-align: right; }
+	.text-center-small { text-align: center; }
+}
+
+/**
+ * Form
+ */
+
+input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color: #c2c2c2;
+	opacity: 1;
+}
+input::-moz-placeholder { /* Firefox 19+ */
+	color: #c2c2c2;
+	opacity: 1;
+}
+input:-ms-input-placeholder { /* IE 10+ */
+	color: #c2c2c2;
+	opacity: 1;
+}
+input:-moz-placeholder { /* Firefox 18- */
+	color: #c2c2c2;
+	opacity: 1;
+}
+
+input {
+	border: 1px solid #e1e1e1;
+	background: #ffffff;
+	padding: 14px 16px;
+	color: #d4d4d4;
+	font-size: 16px;
+	border-radius: 4px;
+	width: 362px;
+	max-width: 100%;
+	box-shadow: 0px 0px 1px #e1e1e1;
+
+	@media (max-width: @screen-small-max) {
+		margin-bottom: 19px;
+	}
+}
+
+.btn {
+	padding: 14px 15px;
+	color: #ffffff;
+	background: #5da30f;
+	border: 0px;
+	border-radius: 5px;
+	font-size: 16px;
+	letter-spacing: 0.5px;
+	margin-left: 20px;
+	min-width: 250px;
+	max-width: 100%;
+
+	@media (max-width: @screen-small-max) {
+		margin-bottom: 19px;
+	}
+}
+
+/**
+ * Header container
+ */
+
+/** Header dimensions **/
+@header-width:               1440px;
+@header-height:              399px;
+
+header {
+	background-color: #eceaed;
+	background-image: url('../assets/image_big.jpg');
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	background-size: cover; 
+	max-width: 100%;
+	margin: 0 auto;
+	width: @header-width;
+	height: @header-height;
+
+	.header-content {
+		height: @header-height;
+
+		> div {
+			position: relative;
+			top: 50%;
+			margin-top: 0px;
+			transform: translateY(-50%);
+			-webkit-transform: translateY(-50%);	
+
+			@media (max-width: @screen-small-max) { 
+				margin-top: 2px;				
+			}			
+		}
+	}
+}
+
+/**
+ * 2nd section
+ */
+.second-section {
+	margin-top: 101px;
+
+	@media (max-width: @screen-small-max) {
+		margin-top: 90px;
+	}
+
+	.discover-link {
+		display: inline-block;
+		margin-top: 12px;
+		font-size: 16px;
+		letter-spacing: 0.2px;
+		margin-right: -1px;
+
+		@media (max-width: @screen-small-max) {
+			margin-top: 1px;
+		}
+
+		img {
+			position: relative;
+			top: 5px;
+			font-size: 14px;
+			padding-left: 9px;
+
+			@media (max-width: @screen-small-max) {
+				top: 6px;
+				padding-left: 5px;
+			}
+		}
+	}
+}
+
+/**
+ * CB slider
+ */
+
+/** Padding between images. Gets divided in half for the left and right. **/
+@cbslider-gutter-width:        14px;
+
+/** Slider images height **/
+@cbslider-height:         	  314px;
+
+/** Slider arrows dimension **/
+@cbslider-arrow-size:           38px;
+
+/** Max. number of images on 1 slide **/
+@cbslider-max-image-on-slide:      5;
+
+.cbslider-holder {
+	margin-top: 74px;
+	margin-bottom: 127px;
+	
+	@media (max-width: @screen-small-max) {
+		margin-top: 77px;
+		margin-bottom: 120px;
+		position: relative;
+		left: 10px; /*For some reason the slider is not centerd in the tablet image - moved 10 pixel to the left relative to center */
+		max-width: 478 + @grid-gutter-width;
+	}
+
+	/** On smaller resolution we need space for arrows because they are hanging out from the container */
+	@media (max-width: @container-small + @cbslider-arrow-size * 2) {
+		left: 0px;
+		padding-left: @cbslider-arrow-size / 2;
+		padding-right: @cbslider-arrow-size / 2;
+	}	
+}
+
+.cbslider {
+	height: @cbslider-height;	
+	position: relative;
+
+	.arrow {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: @cbslider-arrow-size;
+		height: @cbslider-arrow-size;
+		border-radius: @cbslider-arrow-size;
+		overflow: hidden;
+		background: #ffffff;
+		z-index: 5;
+		left: -@cbslider-arrow-size / 2;
+		top: 50%;
+		margin-top: -@cbslider-arrow-size / 2;
+		box-shadow: -2px 2px 1px #ddd;
+		background-image: url('../assets/arrow-left.jpg'); 
+		background-repeat: no-repeat;
+		background-position: center;
+		-webkit-transition: opacity .3s ease-in-out;
+		transition: opacity .3s ease-in-out;
+		
+		&.arrow.right { 
+			left: auto;
+			right: -@cbslider-arrow-size / 2; 
+			box-shadow: 2px 2px 1px #ddd;
+			background-image: url('../assets/arrow-right.jpg');
+		}
+
+		&.disabled {
+			opacity: 0.4;
+			cursor: default;
+		}
+	}
+
+	iframe {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height: 100%;
+		border: 0px;
+		background: transparent;
+		z-index: 1;
+	}
+
+	.inner {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		overflow: hidden;
+		z-index: 2;
+
+		.carousel {
+			height: 100%;
+			margin-left: -@cbslider-gutter-width / 2;
+			margin-right: -@cbslider-gutter-width / 2;
+			white-space: nowrap;
+			font-size: 0;
+			position: relative; 
+
+			/** 
+			 * Loop definition for images per slide generation 
+			 * @param max images per slide  
+			 */
+			.image-on-slide-loop (@i) when (@i > 0) {
+				&.image-on-slide-@{i} > div {
+					width: percentage(1 / @i);					
+				}
+			    .image-on-slide-loop(@i - 1);
+			}
+			.image-on-slide-loop(@cbslider-max-image-on-slide);
+
+			> div {
+				display: inline-block;	
+				height: 100%;
+				padding-left: @cbslider-gutter-width / 2;
+				padding-right: @cbslider-gutter-width / 2;
+				overflow: hidden;
+				position: relative;
+				width: percentage(1 / @cbslider-max-image-on-slide); 
+				
+				.image {
+					position: relative;
+					height: 100%;
+					background-size: cover;
+					background-repeat: no-repeat;
+					background-position: center;
+					border-radius: 0px;
+					border-top-right-radius: 4px;
+					border-top-left-radius: 4px;
+
+					
+					&:before {
+						content: ' ';
+						height: 100%;
+						background: #ffffff;
+						display: block;
+						opacity: 1;
+						visibility: visible;
+						border-radius: 0px;
+						border-top-right-radius: 4px;
+						border-top-left-radius: 4px;
+						background-image: url('../assets/loader.gif');
+						background-repeat: no-repeat;
+						background-position: center; 															
+						-webkit-transition: opacity .2s ease-out, visibility .2s ease-out;
+						transition: opacity .2s ease-out, visibility .2s ease-out;
+					}
+
+					&.loaded {
+						&:before {
+							opacity: 0;
+							visibility: hidden;
+						}
+					}
+				}
+
+				.text {
+					position: relative;					
+					background: rgba(0,0,0,0.7);
+					color: #ffffff;	
+					height: 80px;
+					position: relative;
+					top: -80px;
+					font-weight: 300;
+					letter-spacing: 0.3px;
+
+					> span {
+						padding: 23px 23px 0 23px;						
+						font-size: 16px;
+						display: block;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+					  	overflow: hidden;					  	
+
+					  	@media (max-width: @screen-small-max) {
+					  		padding: 21px 22px 0 22px;
+					  	}
+					}
+					
+					> small {
+						font-size: 12px;	
+						padding: 0 23px;
+						display: block;
+						white-space: nowrap;
+					  	overflow: hidden;
+					  	text-overflow: ellipsis;
+					}
+				}
+			}
+		}
+	}
+}
+
+/**
+ * Footer
+ */
+footer {
+	margin-bottom: 91px;
+
+	.footer-spacer {
+		height: 39px;
+		clear: both;
+
+		@media (max-width: @screen-small-max) {
+			height: 50px;
+		}
+	}
+
+	input {
+		margin-left: -1px;		
+	}
+
+	input, 
+	.btn {
+		@media (max-width: @screen-small-max) { 
+			margin-left: 0px;
+			width: 402px;
+			max-width: 100%;
+		}
+	}
+
+	.social-icons {
+		padding-top: 1px;
+		font-size: 0px;
+
+		@media (max-width: @screen-small-max) {
+			margin-top: 34px;
+		}
+
+		> a {
+			display: inline-block;
+			margin-right: 15px;			
+
+			&:last-child {
+				margin-right: 0px;
+			}
+		}
+	}
+}
