@@ -67,7 +67,7 @@ var cbSliderComponent = {
 		};
 
 		// Stored element width 
-		ctrl.elementWidth = false;
+		ctrl.elementWidth = 0;
 
 		/**
 		 * On element resize
