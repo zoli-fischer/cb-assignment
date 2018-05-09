@@ -16,9 +16,10 @@ I was focusing to make the layout as much as possible look alike to the layout f
 I used AngularJs to create the web app. The web app has 1 controller and 1 component, the slider itself. Auth token to Skyfish API shoud be placed in js/index.js as app value 'skyfishAuthToken'. 
 
 The slider component has an attribute 'skyfish-folder-id' which is the id of the folder that is loaded in the slider from Skyfish. 
-I used CSS LESS for the main style for the app. Using less.js to compile in real-time the LESS style file. I am using this method only for this demonstration, it's not recommended for production because performance issue.
 
-I wanted to use Bootstrap with customized grip, but I was thinking you can see my CSS/LESS/SASS skills better if I write a small grid system (not fully made only parts that I was needing for this task).
+I used CSS LESS for the main style for the app. Using less.js to compile in real-time the LESS style file. I am using this method only for this demonstration, I know it's not recommended for production because performance issue.
+
+I wanted to use Bootstrap with customized grid, but I was thinking you can see my CSS/LESS skills better if I write a small grid system (not fully made only parts that I was needing for this task).
 
 I added Hammer.js for touch event handling. The slider works with touch pan and mouse drag.
 

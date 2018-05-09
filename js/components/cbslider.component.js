@@ -17,7 +17,7 @@ var cbSliderComponent = {
 		// Nr. of media per slide - updated on resize 
 		ctrl.mediaPerSlide = 0;
 
-		// Nr. of most left media - let start with 1
+		// Index of most left media - let start with 0
 		ctrl.currentPosition = 0;
 
 		/**
@@ -67,7 +67,7 @@ var cbSliderComponent = {
 		};
 
 		// Stored element width 
-		ctrl.elementWidth = false;
+		ctrl.elementWidth = 0;
 
 		/**
 		 * On element resize
